@@ -1,0 +1,110 @@
+.formato-panel {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 7px 7px 40px;
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  .form-section label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="date"],
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  button[type="submit"]:hover {
+    background-color: #4f00b8;
+  }
+  .riesgo-card, .aspecto-card {
+    background: #f0e8e8;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  .riesgo-card h4, .aspecto-card h4 {
+    margin-bottom: 10px;
+  }
+  .riesgo-card, .aspecto-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .riesgo-card h4, .aspecto-card h4 {
+    margin-bottom: 10px;
+  }
+  
+  .paragraph-checkbox {
+    display: flex;
+    align-items: flex-start; /* Para alinear la caja con el texto */
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .paragraph-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    margin-top: 3px; /* para alinear con el texto */
+  }
+  
+  .textarea-estilizada {
+    width: 100%;               /* Ocupa todo el ancho disponible (opcional) */
+    min-height: 50px;          /* Altura mínima (para textarea) */
+    background-color: #f7f5f2; /* Color de fondo suave (ajusta a tu gusto) */
+    border: 1px solid #eee;    /* Borde claro */
+    border-radius: 8px;        /* Bordes redondeados */
+    padding: 10px;             /* Espacio interno */
+    font-size: 14px;           /* Tamaño de texto */
+    color: #333;               /* Color del texto */
+    outline: none;             /* Quita el contorno azul en Chrome/Firefox */
+    box-sizing: border-box;    /* Asegura que width incluya padding y borde */
+    resize: none;              /* Evita que el usuario cambie el tamaño (opcional) */
+  }
+  
+  /* Estilo del placeholder */
+  .textarea-estilizada::placeholder {
+    color: #aaa;               /* Color del texto de placeholder */
+    opacity: 1;                /* Asegura que se vea el color en todos los navegadores */
+  }
+  
+  .riesgo-card {
+    /* width: 300px;                  Ajusta según tu diseño */
+  background-color: #ebf0e4;        /* Fondo blanco */
+  border-radius: 8px;            /* Bordes redondeados */
+  overflow: hidden;              /* Para que la imagen no se salga de los bordes */
+  box-shadow: 0 25px 50px rgba(0,0,0,0.1); /* Sombra sutil */
+  margin: 50px 10px 20px 10px;                  /* Separación de otros elementos */
+  font-family: sans-serif;       /* Tipografía base (ajusta a tu gusto) */
+  }
+
+  .aspecto-card {
+     /* width: 300px;                  Ajusta según tu diseño */
+  background-color: #deecf5;        /* Fondo blanco */
+  border-radius: 8px;            /* Bordes redondeados */
+  overflow: hidden;              /* Para que la imagen no se salga de los bordes */
+  box-shadow: 0 25px 50px rgba(0,0,0,0.1); /* Sombra sutil */
+  margin: 50px 10px 20px 10px;                  /* Separación de otros elementos */
+  font-family: sans-serif;       /* Tipografía base (ajusta a tu gusto) */
+  }

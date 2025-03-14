@@ -1,0 +1,71 @@
+
+.contenedorPrincipal{
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0px;
+    box-shadow: 7px 7px 40px;
+}
+
+.areaParametros{
+    background-color: aqua;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 7px 7px 40px;
+}
+
+.areaResultado{
+    background-color: burlywood;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+    box-shadow: 7px 7px 40px;
+}
+
+.secionCalecdario{
+    background-color: transparent;
+    display: flex;
+}
+.boxFechaInicio{
+    background-color: rgb(216, 235, 112);
+    width: 50%;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 7px 7px 40px;
+}
+
+.boxFechaFin{
+    background-color: rgb(228, 176, 79);
+    width: 50%;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 7px 7px 40px;
+}
+
+.textoboxcalendario{
+    text-align: center;
+    margin: 10px;
+}
+
+.btnGenerarFormatos{
+    margin-top: 20px;
+    background-color: black;
+    box-shadow: 7px 7px 40px;
+}
+
+.seccionGenerar{
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border: 1px solid #000;
+    border-collapse: separate;
+  }
+  
+  td {
+    border: 1px solid #555;
+  }

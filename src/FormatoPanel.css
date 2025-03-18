@@ -108,3 +108,12 @@
   margin: 50px 10px 20px 10px;                  /* Separación de otros elementos */
   font-family: sans-serif;       /* Tipografía base (ajusta a tu gusto) */
   }
+
+  .my-subtitle {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #191a1b; /* o el color que quieras */
+  }
+  

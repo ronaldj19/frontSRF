@@ -358,7 +358,7 @@ function FormatoPanel() {
   
     try {
       // Realizamos la petición a la API usando JSON
-      const response = await fetch("https://2uj7c55nia.execute-api.us-east-1.amazonaws.com/dev", {
+      const response = await fetch("https://ooref3ltoy7dz5glhic4ss3saq0jzmdu.lambda-url.us-east-1.on.aws/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",  // Indicamos que el cuerpo es JSON

@@ -44,8 +44,13 @@ function ReporteporFechaPanel () {
        const data = await response.json();
        console.log("Respuesta del servicio:", data.message);
 
+       const cantidadRegistros = data.registrosEncontrados
+    ? data.registrosEncontrados.length
+    : 0;
+
       // Muestra un mensaje de éxito
-      setMessage(`Se mandó a generar los reportes de la fecha ${startDate} a ${endDate}.`);
+      setMessage(`Se mandó a generar los reportes de la fecha ${startDate} a ${endDate}. 
+        Se generaron ${cantidadRegistros} documentos. Para poder descargarlos ingresar a la ruta de almacenamiento xxx proporcionada.`);
     } catch (error) {
       console.error(error);
       setMessage("Ocurrió un error al generar los reportes. Intenta nuevamente.");
@@ -95,7 +100,7 @@ function ReporteporFechaPanel () {
             </div>
           )}
             </div>
-            <div className="areaResultado">
+            <div className="areaResultado" hidden>
                 <h2>Reporte de todos los archivos generados</h2>
                 <table className='table'>
                     <thead>

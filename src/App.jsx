@@ -18,7 +18,7 @@ function App() {
     <div className="container">
       <aside className="sidebar">
         <div className="logo">
-          <img className="icono" src='../public/img/icono.jpg'/>
+          <img className="icono" src='/img/icono.jpg'/>
           <h2>SRF</h2>
         </div>
         <nav>

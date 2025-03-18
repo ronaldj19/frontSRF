@@ -11,6 +11,7 @@ function FormatoPanel() {
     integrantesCuadrilla: "",
     placaVehiculo: "",
     areaTrabajo: "",
+    participantes: [],  // aquí guardaremos los IDs de los integrantes seleccionados
     supervisorInmediato: "",
     zonal: "",
     direccionZonaTrabajo: "",
@@ -23,9 +24,88 @@ function FormatoPanel() {
   });
 
   // Opciones para los <select>
-  const areaTrabajoOptions = ["Elegir","OBRAS DISTRIBUCIÓN", "OBRAS DE TRANSMISIÓN", "B2B", "OPERACIONES","PÉRDIDAS","COMERCIAL","OBRAS AA.HH"];
-  const supervisorOptions = ["Elegir","SERGIO PEÑA BORDON", "EMERSON PAREDES JAYO", "ELDER CORONEL REGALADO","JERSON CARBAJAL JIMENEZ","GIL RAMOS TELLO","HAROLD RAMIREZ UCULMANA","LUIS SUAREZ DOMINGUEZ","HEISON HUAMANÍ MALDONADO","JAVIER MOQUILLAZA PEDROZA","ERICK MEJIA ALARCON","JOSE PALOMARES MAGALLANES","ELMER CHOQUEZ YATACO","CARLOS GODIN ZAMBARANO","JORGE CANCHARI","CARLOS POMEZ MEREL","KEVIN AREVALO PEREZ","GERALD TRILLO SALAZAR","JOSE JUSCAMAITA VARGAS","EDU OLIVERA MARQUEZ","ALEX LEVANO ABREGU","JULIAN CAUTI RIOS","DITO ESCAJADILLO FLORES","JORGE MENDOZA CORRALES","SUNCIÓN ATOCHE","DILAN GUTIERREZ FRANCO"];
+ // Cada objeto tiene la descripción (label) y el código numérico (value)
+const areaTrabajoOptions = [
+  { label: "Elegir", value: 0 },
+  { label: "OBRAS DISTRIBUCIÓN", value: 1 },
+  { label: "OBRAS DE TRANSMISIÓN", value: 2 },
+  { label: "B2B", value: 3 },
+  { label: "OPERACIONES", value: 4 },
+  { label: "PÉRDIDAS", value: 5 },
+  { label: "COMERCIAL", value: 6 },
+  { label: "OBRAS AA.HH", value: 7 },
+];
+
+  const supervisorOptions = [
+    { label: "Elegir", value: 0 },
+    { label: "SERGIO PEÑA BORDON", value: 1 },
+    { label: "EMERSON PAREDES JAYO", value: 2 },
+    { label: "ELDER CORONEL REGALADO", value: 3 },
+    { label: "JERSON CARBAJAL JIMENEZ", value: 4 },
+    { label: "GIL RAMOS TELLO", value: 5 },
+    { label: "HAROLD RAMIREZ UCULMANA", value: 6 },
+    { label: "LUIS SUAREZ DOMINGUEZ", value: 7 },
+    { label: "HEISON HUAMANÍ MALDONADO", value: 8 },
+    { label: "JAVIER MOQUILLAZA PEDROZA", value: 9 },
+    { label: "ERICK MEJIA ALARCON", value: 10 },
+    { label: "JOSE PALOMARES MAGALLANES", value: 11 },
+    { label: "ELMER CHOQUEZ YATACO", value: 12 },
+    { label: "CARLOS GODIN ZAMBARANO", value: 13 },
+    { label: "JORGE CANCHARI", value: 14 },
+    { label: "CARLOS POMEZ MEREL", value: 15 },
+    { label: "KEVIN AREVALO PEREZ", value: 16 },
+    { label: "GERALD TRILLO SALAZAR", value: 17 },
+    { label: "JOSE JUSCAMAITA VARGAS", value: 18 },
+    { label: "EDU OLIVERA MARQUEZ", value: 19 },
+    { label: "ALEX LEVANO ABREGU", value: 20 },
+    { label: "JULIAN CAUTI RIOS", value: 21 },
+    { label: "DITO ESCAJADILLO FLORES", value: 22 },
+    { label: "JORGE MENDOZA CORRALES", value: 23 },
+    { label: "SUNCIÓN ATOCHE", value: 24 },
+    { label: "DILAN GUTIERREZ FRANCO", value: 25 },
+  ];
   const zonalOptions = ["Elegir", "ICA", "PISCO", "CHINCHA","NAZCA","PALPA","PUQUI/CORA CORA"];
+ /* const zonalOptions = [
+    { label: "Elegir", value: 0 },
+    { label: "ICA", value: 1 },
+    { label: "PISCO", value: 2 },
+    { label: "CHINCHA", value: 3 },
+    { label: "NAZCA", value: 4 },
+    { label: "PALPA", value: 5 },
+    { label: "PUQUI/CORA CORA", value: 6 },
+  ]; */
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selected, setSelected] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  // Podrías obtener estos datos desde una API o tenerlos hardcodeados:
+const allIntegrants  = [
+  { id: 1, name: "Luis Mellan" },
+  { id: 2, name: "Angel Mendoza" },
+  { id: 3, name: "Pietro Castro" },
+  // Agrega los que necesites...
+];
+  // Filtrar la lista según el texto escrito y 
+  // que no aparezcan los que ya están en "selected"
+  const filteredIntegrants = allIntegrants.filter((integrant) =>
+    integrant.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    !selected.some((sel) => sel.id === integrant.id)
+  );
+
+  // Maneja la selección de un integrante desde la lista
+  const handleSelect = (integrant) => {
+    // Agregamos al array de seleccionados
+    setSelected((prev) => [...prev, integrant]);
+    // Limpiamos el campo de búsqueda
+    setSearchTerm("");
+    // Ocultamos la lista desplegable
+    setShowDropdown(false);
+  };
+
+  // Remueve un integrante seleccionado
+  const handleRemove = (id) => {
+    setSelected((prev) => prev.filter((item) => item.id !== id));
+  };
 
   // Datos estructurados para “Peligros / Riesgos”
   const peligrosRiesgosData = [
@@ -333,13 +413,23 @@ function FormatoPanel() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    // Obtén la fecha/hora actual
+      const now = new Date();
+
+    // Formatea a HH:MM:SS (24 horas)
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    // Hora actual en formato "HH:MM:SS"
+      const currentTime = `${hours}:${minutes}:${seconds}`;
     // Construimos el objeto con los campos del formulario
     const dataToSend = {
-      fecha: "2025-03-19",                   // "2025-03-13"
-      hora: "14:30:00",                              // Podrías usar otro state si lo capturas en el formulario
-      id_area: 1,                                    // Podrías mapear formData.areaTrabajo si tu Lambda maneja un INT
-      id_contratista: 2,                             // Mapea si lo obtienes del formulario
-      permiso_trabajo: 845412,
+      fecha: formData.fechaCharla,                   // "2025-03-13"
+      hora: currentTime,                              // Podrías usar otro state si lo capturas en el formulario
+      id_area: formData.areaTrabajo,                                    // Podrías mapear formData.areaTrabajo si tu Lambda maneja un INT
+      id_contratista: formData.supervisorInmediato,                             // Mapea si lo obtienes del formulario
+      permiso_trabajo: formData.permisoTrabajo,
       id_personal_responsable: 3,
       descripcion_peligro: "Peligro en el trabajo",
       imagen: null,                                  // Si quisieras enviar una imagen en base64, aquí la asignas
@@ -347,10 +437,7 @@ function FormatoPanel() {
         { "id_medida": 1, "id_peligro": 1, "checked": 0 },
                 { "id_medida": 2, "id_peligro": 1, "checked": 0 }
       ],                                   // Ajusta si tu Lambda las necesita
-      participantes: [
-        { "id_personal": 1 },
-                { "id_personal": 2 }
-      ]                              // Ajusta si tu Lambda las necesita
+      participantes: selected.map((item) => ({ id_personal: item.id })),                             // Ajusta si tu Lambda las necesita
     };
   
       // Imprimir en consola para verificar
@@ -389,7 +476,7 @@ function FormatoPanel() {
       <form onSubmit={handleSubmit}>
         {/* DATOS GENERALES */}
         <div className="form-section">
-          <label>Fecha de la Charla</label>
+          <label>Fecha de la Charla(*)</label>
           <input className="textarea-estilizada" 
             type="date"
             name="fechaCharla"
@@ -397,10 +484,10 @@ function FormatoPanel() {
             onChange={handleInputChange}
           />
 
-          <label>Permiso de Trabajo</label>
+          <label>Permiso de Trabajo(*)</label>
           <input className="textarea-estilizada" 
             placeholder="Escribe un mensaje..."
-            type="text"
+            type="number"
             name="permisoTrabajo"
             value={formData.permisoTrabajo}
             onChange={handleInputChange}
@@ -424,14 +511,77 @@ function FormatoPanel() {
             onChange={handleInputChange}
           />
 
-          <label>Integrantes de la Cuadrilla</label>
-          <input className="textarea-estilizada" 
-            placeholder="Escribe un mensaje..."
-            type="text"
-            name="integrantesCuadrilla"
-            value={formData.integrantesCuadrilla}
-            onChange={handleInputChange}
-          />
+<div style={{ position: "relative" }}>
+      <label>Integrantes de la Cuadrilla(*)</label>
+      <br />
+      {/* Campo de búsqueda */}
+      <input
+        type="text"
+        placeholder="Buscar integrante..."
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          // Cada vez que cambie el texto, volvemos a mostrar el dropdown
+          setShowDropdown(true);
+        }}
+        onFocus={() => setShowDropdown(true)} // al enfocar, mostramos la lista
+        style={{ width: "300px" }}
+      />
+
+      {/* Lista desplegable de sugerencias */}
+      {showDropdown && filteredIntegrants.length > 0 && (
+        <ul
+          style={{
+            position: "absolute",
+            top: "60px",
+            left: 0,
+            width: "300px",
+            border: "1px solid #ccc",
+            backgroundColor: "white",
+            listStyle: "none",
+            margin: 0,
+            padding: 0,
+            maxHeight: "150px",
+            overflowY: "auto",
+            zIndex: 999,
+          }}
+        >
+          {filteredIntegrants.map((integrant) => (
+            <li
+              key={integrant.id}
+              onClick={() => handleSelect(integrant)}
+              style={{ padding: "8px", cursor: "pointer" }}
+            >
+              {integrant.name}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {/* Lista de integrantes seleccionados */}
+      <div style={{ marginTop: "1rem" }}>
+        {selected.map((integrant) => (
+          <div
+            key={integrant.id}
+            style={{
+              display: "inline-block",
+              background: "#eee",
+              padding: "5px 10px",
+              margin: "5px",
+              borderRadius: "4px",
+            }}
+          >
+            {integrant.name}
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={() => handleRemove(integrant.id)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
 
           <label>Placa de Vehículo</label>
           <input className="textarea-estilizada" 
@@ -445,28 +595,28 @@ function FormatoPanel() {
 
         {/* SELECCIONES (COMBOBOX) */}
         <div className="form-section">
-          <label>Área de Trabajo</label>
+          <label>Área de Trabajo(*)</label>
           <select className="textarea-estilizada" 
             name="areaTrabajo"
             value={formData.areaTrabajo}
             onChange={handleInputChange}
           >
             {areaTrabajoOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
               </option>
             ))}
           </select>
 
-          <label>Supervisor Inmediato</label>
+          <label>Supervisor Inmediato(*)</label>
           <select className="textarea-estilizada" 
             name="supervisorInmediato"
             value={formData.supervisorInmediato}
             onChange={handleInputChange}
           >
             {supervisorOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt}
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
               </option>
             ))}
           </select>

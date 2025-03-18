@@ -314,6 +314,7 @@ const handleResponsableChange = (e) => {
     // Actualizar ambos campos en el estado
     setFormData((prev) => ({
       ...prev,
+      idResponsable: responsable.id,
       responsableCuadrilla: responsable.nombre,
       dniResponsable: responsable.dni,
     }));
@@ -321,6 +322,7 @@ const handleResponsableChange = (e) => {
     // Si eligen "Seleccionar..." (value = 0), limpiar campos
     setFormData((prev) => ({
       ...prev,
+      idResponsable: responsable.id,
       responsableCuadrilla: "",
       dniResponsable: "",
     }));
@@ -381,7 +383,7 @@ const handleResponsableChange = (e) => {
       id_area: formData.areaTrabajo,                                    // Podrías mapear formData.areaTrabajo si tu Lambda maneja un INT
       id_contratista: formData.supervisorInmediato,                             // Mapea si lo obtienes del formulario
       permiso_trabajo: formData.permisoTrabajo,
-      id_personal_responsable: responsable.id,
+      id_personal_responsable: formData.idResponsable,
       descripcion_peligro: "Peligro en el trabajo",
       imagen: null,                                  // Si quisieras enviar una imagen en base64, aquí la asignas
       medidas:selectedMeasures.map((item) => ({

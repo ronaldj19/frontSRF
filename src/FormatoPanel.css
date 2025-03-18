@@ -117,3 +117,8 @@
     color: #191a1b; /* o el color que quieras */
   }
   
+  .error {
+    border: 2px solid red;
+    background-color: #ffe5e5; /* color de fondo claro para destacar */
+  }
+  

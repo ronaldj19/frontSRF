@@ -26,7 +26,7 @@ function FormatoPanel() {
   // Opciones para los <select>
  // Cada objeto tiene la descripción (label) y el código numérico (value)
 const areaTrabajoOptions = [
-  { label: "Elegir", value: 0 },
+  { label: "-- Seleccione --", value: "" },
   { label: "OBRAS DISTRIBUCIÓN", value: 1 },
   { label: "OBRAS DE TRANSMISIÓN", value: 2 },
   { label: "B2B", value: 3 },
@@ -37,7 +37,7 @@ const areaTrabajoOptions = [
 ];
 
   const supervisorOptions = [
-    { label: "Elegir", value: 0 },
+    { label: "-- Seleccione --", value: "" },
     { label: "SERGIO PEÑA BORDON", value: 1 },
     { label: "EMERSON PAREDES JAYO", value: 2 },
     { label: "ELDER CORONEL REGALADO", value: 3 },
@@ -300,6 +300,7 @@ const handleMeasureChange = (e, hazardId, measureId) => {
 
  // Podrías traer esto de una API o tenerlo hardcodeado
 const responsablesData = [
+  { id: "", nombre: "-- Seleccione --", dni: "" },
   { id: 1, nombre: "Juan Pérez", dni: "12345678" },
   { id: 2, nombre: "María López", dni: "87654321" },
   { id: 3, nombre: "Carlos Sánchez", dni: "44556677" },
@@ -431,7 +432,7 @@ const handleResponsableChange = (e) => {
         {/* DATOS GENERALES */}
         <div className="form-section">
           <label>Fecha de la Charla(*)</label>
-          <input className="textarea-estilizada" 
+          <input className="textarea-estilizada"  required
             type="date"
             name="fechaCharla"
             value={formData.fechaCharla}
@@ -439,7 +440,7 @@ const handleResponsableChange = (e) => {
           />
 
           <label>Permiso de Trabajo(*)</label>
-          <input className="textarea-estilizada" 
+          <input className="textarea-estilizada" required 
             placeholder="Escribe un mensaje..."
             type="number"
             name="permisoTrabajo"
@@ -447,13 +448,12 @@ const handleResponsableChange = (e) => {
             onChange={handleInputChange}
           />
 
-<label>Responsable de Cuadrilla</label>
+<label>Responsable de Cuadrilla(*)</label>
 <select
-  className="textarea-estilizada"
+  className="textarea-estilizada" required
   value={responsablesData.find((r) => r.nombre === formData.responsableCuadrilla)?.id || 0}
   onChange={handleResponsableChange}
 >
-  <option value={0}>-- Seleccione --</option>
   {responsablesData.map((r) => (
     <option key={r.id} value={r.id}>
       {r.nombre}
@@ -462,9 +462,9 @@ const handleResponsableChange = (e) => {
 </select>
 
 
-<label>DNI - Responsable del Trabajo</label>
+<label>DNI - Responsable del Trabajo(*)</label>
 <input
-  className="textarea-estilizada"
+  className="textarea-estilizada" required
   placeholder="Escribe un mensaje..."
   type="text"
   name="dniResponsable"
@@ -481,7 +481,7 @@ const handleResponsableChange = (e) => {
       <label>Integrantes de la Cuadrilla(*)</label>
       <br />
       {/* Campo de búsqueda */}
-      <input
+      <input 
         type="text"
         placeholder="Buscar integrante..."
         value={searchTerm}
@@ -527,7 +527,7 @@ const handleResponsableChange = (e) => {
       {/* Lista de integrantes seleccionados */}
       <div style={{ marginTop: "1rem" }}>
         {selected.map((integrant) => (
-          <div
+          <div 
             key={integrant.id}
             style={{
               display: "inline-block",
@@ -562,7 +562,7 @@ const handleResponsableChange = (e) => {
         {/* SELECCIONES (COMBOBOX) */}
         <div className="form-section">
           <label>Área de Trabajo(*)</label>
-          <select className="textarea-estilizada" 
+          <select className="textarea-estilizada" required 
             name="areaTrabajo"
             value={formData.areaTrabajo}
             onChange={handleInputChange}
@@ -575,7 +575,7 @@ const handleResponsableChange = (e) => {
           </select>
 
           <label>Supervisor Inmediato(*)</label>
-          <select className="textarea-estilizada" 
+          <select className="textarea-estilizada" required 
             name="supervisorInmediato"
             value={formData.supervisorInmediato}
             onChange={handleInputChange}
@@ -675,3 +675,5 @@ const handleResponsableChange = (e) => {
 }
 
 export default FormatoPanel;
+
+

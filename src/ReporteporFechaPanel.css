@@ -50,9 +50,14 @@
     margin: 10px;
 }
 
-.btnGenerarFormatos{
+.btnGenerarFormatos {
     margin-top: 20px;
     background-color: black;
+    color: white;            /* Agrega esta línea para texto en blanco */
+    padding: 10px 20px;      /* Agrega algo de padding para que se vea mejor */
+    border: none;            /* Opcional: quita el borde por defecto */
+    border-radius: 4px;      /* Opcional: esquinas redondeadas */
+    cursor: pointer;         /* Cambia el cursor al pasar sobre el botón */
     box-shadow: 7px 7px 40px;
 }
 

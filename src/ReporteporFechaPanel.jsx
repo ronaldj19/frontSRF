@@ -50,7 +50,7 @@ function ReporteporFechaPanel () {
 
       // Muestra un mensaje de éxito
       setMessage(`Se mandó a generar los reportes de la fecha ${startDate} a ${endDate}. 
-        Se generaron ${cantidadRegistros} documentos. Para poder descargarlos ingresar a la ruta de almacenamiento xxx proporcionada.`);
+        Se generaron ${cantidadRegistros} documentos. Para poder descargarlos ingresar a la ruta de almacenamiento "/reportes_generados/" proporcionada.`);
     } catch (error) {
       console.error(error);
       setMessage("Ocurrió un error al generar los reportes. Intenta nuevamente.");
